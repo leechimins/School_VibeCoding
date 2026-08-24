@@ -1,33 +1,139 @@
-# Gradle files
-.gradle/
-build/
+# ==========================================
+# Universal .gitignore (Web, Mobile App, WebApp)
+# ==========================================
 
-# Local configuration file (sdk path, etc)
-local.properties
+# --- Operating System & Editor Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.iws
+*.ipr
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Log/OS Files
+# --- Logs & Runtime ---
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
 
-# Android Studio generated files and folders
+# --- Environment & Secret Variables ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# --- Web & WebApp (Node, Frontend Frameworks) ---
+node_modules/
+jspm_packages/
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.cache/
+.parcel-cache/
+.turbo/
+.vercel/
+.output/
+*.tsbuildinfo
+package-lock.json.bak
+
+# --- Android App ---
+.gradle/
 captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+*.aab
+*.ap_
 output.json
-
-# IntelliJ
-*.iml
-.idea/
+local.properties
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
-
-# Keystore files
 *.jks
 *.keystore
-
-# Google Services (e.g. APIs or Firebase)
 google-services.json
-
-# Android Profiling
 *.hprof
+
+# --- iOS & macOS App (Xcode, CocoaPods, Swift PM) ---
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+Pods/
+Podfile.lock
+.build/
+.swiftpm/
+GoogleService-Info.plist
+
+# --- Flutter / Dart ---
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# --- Testing & Coverage ---
+coverage/
+*.lcov
+.nyc_output/
+.cypress/
+cypress/screenshots/
+cypress/videos/
+
+# --- Temporary & Scratch Files ---
+tmp/
+temp/
+*.tmp
+*.bak

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>반가워요! 저를 소개합니다 ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Pretendard:wght@300;400;600;700;800&family=Gaegu:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ffeef2 0%, #f0f4ff 50%, #e8f7f5 100%);
+      --card-bg: rgba(255, 255, 255, 0.72);
+      --card-border: rgba(255, 255, 255, 0.85);
+      --primary: #ff8fa3;
+      --primary-hover: #ff758f;
+      --secondary: #b3c5ff;
+      --accent: #a0e8d5;
+      --text-main: #3d3b4f;
+      --text-sub: #78758d;
+      --shadow-soft: 0 20px 40px -15px rgba(180, 160, 200, 0.25);
+      --shadow-card: 0 12px 28px rgba(160, 180, 210, 0.18);
+      --glass-blur: blur(16px);
+      --badge-bg: rgba(255, 255, 255, 0.8);
+    }
+
+    [data-theme="lavender"] {
+      --bg-gradient: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 50%, #fce7f3 100%);
+      --primary: #c084fc;
+      --primary-hover: #a855f7;
+      --secondary: #a5b4fc;
+      --accent: #f472b6;
+    }
+
+    [data-theme="mint"] {
+      --bg-gradient: linear-gradient(135deg, #e6fffa 0%, #e0f2fe 50%, #fef3c7 100%);
+      --primary: #2dd4bf;
+      --primary-hover: #14b8a6;
+      --secondary: #7dd3fc;
+      --accent: #fcd34d;
+    }
+
+    [data-theme="sunset"] {
+      --bg-gradient: linear-gradient(135deg, #ffedd5 0%, #ffe4e6 50%, #f3e8ff 100%);
+      --primary: #fb923c;
+      --primary-hover: #f97316;
+      --secondary: #f43f5e;
+      --accent: #c084fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 80px;
+      overflow-x: hidden;
+      position: relative;
+      transition: background 0.6s ease;
+    }
+
+    /* Floating Pastel Orbs Background Animation */
+    .bg-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      animation: float 20s infinite alternate ease-in-out;
+    }
+
+    .orb-1 {
+      width: 380px;
+      height: 380px;
+      background: #ffd1dc;
+      top: -100px;
+      left: -80px;
+      animation-duration: 18s;
+    }
+
+    .orb-2 {
+      width: 450px;
+      height: 450px;
+      background: #c7d2fe;
+      bottom: -100px;
+      right: -100px;
+      animation-duration: 24s;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 320px;
+      height: 320px;
+      background: #ccfbf1;
+      top: 40%;
+      left: 60%;
+      animation-duration: 20s;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: translate(40px, 60px) rotate(90deg) scale(1.1);
+      }
+
+      100% {
+        transform: translate(-30px, 30px) rotate(180deg) scale(0.95);
+      }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Floating Navigation / Palette Selector */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+
+    .theme-picker {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .theme-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .theme-dot.active {
+      outline: 2px solid var(--text-main);
+      outline-offset: 1px;
+    }
+
+    /* Profile Hero Card */
+    .hero-card {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 36px;
+      padding: 48px 40px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero-card:hover {
+      box-shadow: 0 24px 50px -15px rgba(180, 160, 200, 0.35);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #ffd6e0 0%, #c1e7e3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+      box-shadow: 0 16px 30px rgba(255, 143, 163, 0.3);
+      border: 4px solid #fff;
+      transform: rotate(-3deg);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .avatar:hover {
+      transform: rotate(4deg) scale(1.06);
+    }
+
+    .status-pill {
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      background: #ffffff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+    }
+
+    .hero-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .greeting-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      width: fit-content;
+      border: 1px solid rgba(255, 143, 163, 0.2);
+    }
+
+    .hero-name {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-name .highlight {
+      background: linear-gradient(120deg, var(--primary), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-bio {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-sub);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      background: var(--badge-bg);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Actions Bar */
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 20px -4px rgba(255, 143, 163, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 24px -4px rgba(255, 143, 163, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-secondary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-like {
+      position: relative;
+    }
+
+    .like-count {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    /* Section Styling */
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      letter-spacing: -0.4px;
+    }
+
+    .section-title span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      font-size: 18px;
+    }
+
+    /* Hobby Grid */
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .hobby-card {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 26px 24px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hobby-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--card-accent, #ffd1dc), var(--card-accent-2, #c7d2fe));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .hobby-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 36px rgba(160, 180, 210, 0.28);
+    }
+
+    .hobby-card:hover::before {
+      opacity: 1;
+    }
+
+    .hobby-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hobby-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+      background: #ffffff;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .hobby-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hobby-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .hobby-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.55;
+    }
+
+    .hobby-stats {
+      display: flex;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(160, 160, 180, 0.2);
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    /* About Details Grid */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .detail-box {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .detail-emoji {
+      font-size: 28px;
+      background: #ffffff;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .detail-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Guestbook / Message Box */
+    .interactive-card {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 32px 36px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .custom-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(200, 200, 220, 0.4);
+      padding: 14px 20px;
+      border-radius: 18px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .custom-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 143, 163, 0.2);
+      background: #ffffff;
+    }
+
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .message-item {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      padding: 12px 18px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .message-text {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .message-time {
+      color: var(--text-sub);
+      font-size: 11px;
+      margin-left: 12px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(50, 45, 65, 0.35);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 36px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+      animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f3f4f6;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #e5e7eb;
+      color: #111;
+    }
+
+    /* Floating Heart Animation */
+    .floating-heart {
+      position: fixed;
+      font-size: 24px;
+      pointer-events: none;
+      z-index: 999;
+      animation: flyUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes flyUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.8) rotate(0deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.4) rotate(20deg);
+      }
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 36px 24px;
+        gap: 24px;
+      }
+
+      .hero-name {
+        justify-content: center;
+      }
+
+      .tag-list {
+        justify-content: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .top-bar {
+        padding: 10px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="logo-badge">
+        <span>🌸</span>
+        <span>My Pastel Space</span>
+      </div>
+
+      <div class="theme-picker" title="테마 색상 변경">
+        <span style="font-size: 12px; color: var(--text-sub); margin-right: 4px; font-weight: 600;">Theme:</span>
+        <div class="theme-dot active" style="background: #ff8fa3;" onclick="setTheme('default', this)" title="로맨틱 핑크">
+        </div>
+        <div class="theme-dot" style="background: #c084fc;" onclick="setTheme('lavender', this)" title="소프트 라벤더"></div>
+        <div class="theme-dot" style="background: #2dd4bf;" onclick="setTheme('mint', this)" title="민트 브리즈"></div>
+        <div class="theme-dot" style="background: #fb923c;" onclick="setTheme('sunset', this)" title="웜 선셋"></div>
+      </div>
+    </header>
+
+    <!-- Main Hero Card (Profile) -->
+    <main class="hero-card">
+      <div class="avatar-wrapper">
+        <div class="avatar" id="avatarEmoji" onclick="changeAvatar()" title="클릭해서 아바타 변경하기! 🎨">
+          🎀
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>Vibing & Coding</span>
+        </div>
+      </div>
+
+      <div class="hero-info">
+        <div class="greeting-chip">
+          <span>✨</span>
+          <span>HELLO WORLD</span>
+        </div>
+
+        <h1 class="hero-name">
+          안녕하세요, <span class="highlight" id="profileName">이지민 (Lee Jimin)</span> 입니다!
+        </h1>
+
+        <p class="hero-bio" id="profileBio">
+          모바일 앱과 게임 개발에 열정을 가진 컴퓨터학과 22학번 개발자입니다.
+          상상한 아이디어를 직접 플레이하고 만질 수 있는 생생한 코드로 실체화하는 순간을 가장 사랑합니다! 🌷
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">📱 모바일 앱 개발</span>
+          <span class="tag">🎮 게임 개발 (Unity/Unreal)</span>
+          <span class="tag">⚡ 바이브 코딩</span>
+          <span class="tag">🧗‍♂️ 클라이밍 & 볼더링</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-like" onclick="handleLike(event)" id="likeBtn">
+            <span>💖 응원하기</span>
+            <span class="like-count" id="likeCount">42</span>
+          </button>
+          <button class="btn btn-secondary" onclick="openEditModal()">
+            <span>✏️ 프로필 수정</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Quick Info Cards -->
+    <section>
+      <div class="section-title">
+        <span class="icon">💫</span>
+        <span>간단 소개 (About Me)</span>
+      </div>
+      <div class="details-grid">
+        <div class="detail-box">
+          <div class="detail-emoji">🎓</div>
+          <div>
+            <div class="detail-label">전공 및 학번</div>
+            <div class="detail-value">컴퓨터학과 22학번</div>
+          </div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-emoji">📱</div>
+          <div>
+            <div class="detail-label">주력 분야</div>
+            <div class="detail-value">모바일 앱 & 게임 개발</div>
+          </div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-emoji">🧗‍♂️</div>
+          <div>
+            <div class="detail-label">활동적인 취미</div>
+            <div class="detail-value">볼더링 & 클라이밍</div>
+          </div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-emoji">⚡</div>
+          <div>
+            <div class="detail-label">개발 스타일</div>
+            <div class="detail-value">바이브 코딩 & 빠른 구현</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section>
+      <div class="section-title">
+        <span class="icon">🎨</span>
+        <span>취미 & 좋아하는 것들 (My Hobbies)</span>
+      </div>
+
+      <div class="hobby-grid">
+        <!-- Hobby 1 -->
+        <div class="hobby-card" style="--card-accent: #ffb5a7; --card-accent-2: #fcd5ce;"
+          onclick="showHobbyDetail('모바일 앱 개발 & UI/UX 스케치', 'Figma로 직관적인 인터페이스를 디자인하고 Android Studio(Kotlin)나 Flutter로 실제 사용 가능한 앱을 구현합니다!', '📱')">
+          <div class="hobby-header">
+            <div class="hobby-icon-box" style="background: #fff0f3;">📱</div>
+            <span class="hobby-tag">Mobile & UI</span>
+          </div>
+          <h3 class="hobby-title">모바일 앱 개발</h3>
+          <p class="hobby-desc">일상의 편리함을 더하는 앱 아이디어를 구상하고 직접 코딩하여 출시하는 과정이 즐겁습니다.</p>
+          <div class="hobby-stats">
+            <span>🚀 Android / Flutter</span>
+            <span>🎨 Figma 디자인</span>
+          </div>
+        </div>
+
+        <!-- Hobby 2 -->
+        <div class="hobby-card" style="--card-accent: #b8c0ff; --card-accent-2: #c8b6ff;"
+          onclick="showHobbyDetail('게임 개발 & 시스템 분석', 'Unity와 C#, Unreal Engine을 활용해 생동감 넘치는 가상 세계와 손맛 있는 조작감을 만듭니다.', '🎮')">
+          <div class="hobby-header">
+            <div class="hobby-icon-box" style="background: #eef2ff;">🎮</div>
+            <span class="hobby-tag">Game Engine</span>
+          </div>
+          <h3 class="hobby-title">게임 개발 & 기획</h3>
+          <p class="hobby-desc">인디 게임을 플레이하며 시스템을 분석하고, 나만의 창의적인 게임 루프를 제작합니다.</p>
+          <div class="hobby-stats">
+            <span>🕹️ Unity / Unreal</span>
+            <span>✨ 인터랙티브 구현</span>
+          </div>
+        </div>
+
+        <!-- Hobby 3 -->
+        <div class="hobby-card" style="--card-accent: #ffd166; --card-accent-2: #06d6a0;"
+          onclick="showHobbyDetail('운동 & 클라이밍 (볼더링)', '루트를 분석하고 하나씩 홀드를 잡아가며 꼭대기에 오를 때의 짜릿한 성취감을 가장 사랑해요!', '🧗‍♂️')">
+          <div class="hobby-header">
+            <div class="hobby-icon-box" style="background: #fef9c3;">🧗‍♂️</div>
+            <span class="hobby-tag">Sports & Vibe</span>
+          </div>
+          <h3 class="hobby-title">볼더링 & 클라이밍</h3>
+          <p class="hobby-desc">복잡한 문제를 신체와 두뇌로 하나씩 풀어나가는 활동적인 취미입니다.</p>
+          <div class="hobby-stats">
+            <span>🔥 몰입도 최고</span>
+            <span>💪 스트레스 해소</span>
+          </div>
+        </div>
+
+        <!-- Hobby 4 -->
+        <div class="hobby-card" style="--card-accent: #a0e8d5; --card-accent-2: #b5e2fa;"
+          onclick="showHobbyDetail('최신 AI 툴 & 바이브 코딩', 'AI 도구를 활용해 번뜩이는 아이디어를 초고속으로 프로토타이핑하고 테스트합니다.', '⚡')">
+          <div class="hobby-header">
+            <div class="hobby-icon-box" style="background: #ecfdf5;">⚡</div>
+            <span class="hobby-tag">AI & Fast Prototyping</span>
+          </div>
+          <h3 class="hobby-title">바이브 코딩 & AI 연구</h3>
+          <p class="hobby-desc">최신 테크 트렌드를 탐색하며 아이디어를 가장 빠르게 세상에 선보이는 연구를 합니다.</p>
+          <div class="hobby-stats">
+            <span>🚀 생산성 극대화</span>
+            <span>💡 끊임없는 탐구</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guestbook Interactive Section -->
+    <section>
+      <div class="interactive-card">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span class="icon">💌</span>
+          <span>한 줄 방명록 (Leave a note)</span>
+        </div>
+        <p style="font-size: 14px; color: var(--text-sub); margin-top: -8px;">
+          놀러오신 기념으로 따뜻한 응원의 한 마디를 남겨주세요! 😊
+        </p>
+
+        <form class="input-group" onsubmit="addMessage(event)">
+          <input type="text" id="guestMessageInput" class="custom-input"
+            placeholder="응원의 한마디를 적어보세요! (예: 웹페이지 너무 예뻐요 ✨)" required maxlength="50">
+          <button type="submit" class="btn btn-primary">
+            <span>전송</span>
+          </button>
+        </form>
+
+        <div class="messages-list" id="messagesContainer">
+          <div class="message-item">
+            <span class="message-text">🌸 방문해주셔서 고마워요! 오늘도 기분 좋은 하루 보내세요!</span>
+            <span class="message-time">방금 전</span>
+          </div>
+          <div class="message-item">
+            <span class="message-text">💖 파스텔 톤 디자인이 너무 포근하고 예쁘네요 :)</span>
+            <span class="message-time">5분 전</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Jimin's Pastel Portfolio • Built with Passion & Vibe Coding 🌷</p>
+    </footer>
+
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="editModal" onclick="handleModalBgClick(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+      <h3 style="font-size: 20px; font-weight: 700; color: var(--text-main);">프로필 수정하기 ✨</h3>
+      <p style="font-size: 13px; color: var(--text-sub);">페이지에 표시될 이름과 소개글을 직접 변경해보세요.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--text-sub);">이름</label>
+        <input type="text" id="editNameInput" class="custom-input" placeholder="이름을 입력하세요">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--text-sub);">자기소개 한 줄</label>
+        <textarea id="editBioInput" class="custom-input" style="height: 90px; resize: none;"
+          placeholder="자기소개를 입력하세요"></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 8px;"
+        onclick="saveProfile()">
+        <span>저장 완료</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Hobby Detail Modal -->
+  <div class="modal-overlay" id="hobbyModal" onclick="handleHobbyModalBgClick(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeHobbyModal()">✕</button>
+      <div id="modalHobbyIcon" style="font-size: 40px; margin-bottom: 4px;">🎨</div>
+      <h3 id="modalHobbyTitle" style="font-size: 22px; font-weight: 700; color: var(--text-main);">취미 제목</h3>
+      <p id="modalHobbyDesc" style="font-size: 14px; color: var(--text-sub); line-height: 1.6;">취미 상세 내용</p>
+      <button class="btn btn-secondary" style="width: 100%; justify-content: center; margin-top: 10px;"
+        onclick="closeHobbyModal()">
+        <span>확인</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Theme Switcher
+    function setTheme(theme, el) {
+      if (theme === 'default') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
+      if (el) el.classList.add('active');
+    }
+
+    // Avatar Randomizer
+    const avatarList = ['🎀', '✨', '🌸', '🌷', '🍰', '🧸', '🐣', '🐰', '⭐', '🥑'];
+    let avatarIdx = 0;
+    function changeAvatar() {
+      avatarIdx = (avatarIdx + 1) % avatarList.length;
+      const avatar = document.getElementById('avatarEmoji');
+      avatar.textContent = avatarList[avatarIdx];
+
+      // Fun spin animation
+      avatar.style.transform = 'rotate(360deg) scale(1.15)';
+      setTimeout(() => {
+        avatar.style.transform = '';
+      }, 400);
+    }
+
+    // Likes & Floating Hearts
+    let likes = 42;
+    function handleLike(event) {
+      likes++;
+      document.getElementById('likeCount').textContent = likes;
+
+      // Spawn floating hearts
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = ['💖', '💕', '✨', '🌸', '🥰'][Math.floor(Math.random() * 5)];
+
+      const x = event.clientX + (Math.random() * 40 - 20);
+      const y = event.clientY;
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1200);
+    }
+
+    // Profile Edit Modal
+    function openEditModal() {
+      document.getElementById('editNameInput').value = document.getElementById('profileName').textContent;
+      document.getElementById('editBioInput').value = document.getElementById('profileBio').textContent.trim();
+      document.getElementById('editModal').classList.add('active');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').classList.remove('active');
+    }
+
+    function handleModalBgClick(e) {
+      if (e.target.id === 'editModal') closeEditModal();
+    }
+
+    function saveProfile() {
+      const newName = document.getElementById('editNameInput').value.trim();
+      const newBio = document.getElementById('editBioInput').value.trim();
+
+      if (newName) document.getElementById('profileName').textContent = newName;
+      if (newBio) document.getElementById('profileBio').textContent = newBio;
+
+      closeEditModal();
+    }
+
+    // Hobby Detail Modal
+    function showHobbyDetail(title, desc, icon) {
+      document.getElementById('modalHobbyTitle').textContent = title;
+      document.getElementById('modalHobbyDesc').textContent = desc;
+      document.getElementById('modalHobbyIcon').textContent = icon;
+      document.getElementById('hobbyModal').classList.add('active');
+    }
+
+    function closeHobbyModal() {
+      document.getElementById('hobbyModal').classList.remove('active');
+    }
+
+    function handleHobbyModalBgClick(e) {
+      if (e.target.id === 'hobbyModal') closeHobbyModal();
+    }
+
+    // Guestbook Message
+    function addMessage(event) {
+      event.preventDefault();
+      const input = document.getElementById('guestMessageInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('messagesContainer');
+      const item = document.createElement('div');
+      item.className = 'message-item';
+      item.innerHTML = `
+        <span class="message-text">💬 ${escapeHtml(text)}</span>
+        <span class="message-time">방금 전</span>
+      `;
+
+      container.prepend(item);
+      input.value = '';
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+
+</html>
