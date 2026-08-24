@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Computer_Science-22학번-6C5CE7?style=flat-square"/>
   <img src="https://img.shields.io/badge/Focus-Mobile%20App%20%26%20Game%20Dev-4ECDC4?style=flat-square"/>
   <img src="https://img.shields.io/badge/Status-Seeking%20Challenges-333333?style=flat-square"/>
-  <a href="https://github.com/leechimins"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fleechimins&count_bg=%234ECDC4&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" alt="Hits"/></a>
+  <a href="https://github.com/leechimins"><img src="https://komarev.com/ghpvc/?username=leechimins&color=4ecdc4&style=flat-square&label=Profile+Views" alt="Profile Views"/></a>
 </div>
 
 <br/>
@@ -63,7 +63,7 @@
 ## 📊 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=leechimins&show_icons=true&theme=tokyonight&hide_border=true" alt="Jimin's GitHub Stats" height="150"/>
+  <img src="https://github-readme-stats-fast.vercel.app/api?username=leechimins&show_icons=true&theme=tokyonight&hide_border=true" alt="Jimin's GitHub Stats" height="150"/>
   <img src="https://streak-stats.demolab.com?user=leechimins&theme=tokyonight&hide_border=true" alt="GitHub Streak" height="150"/>
 </div>
 
