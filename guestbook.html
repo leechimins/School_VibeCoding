@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방명록 💌 | My Pastel Space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Pretendard:wght@300;400;600;700;800&family=Gaegu:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem('vibecoding_theme');
+      if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- Floating Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <a class="logo-badge" href="hello.html" style="text-decoration: none; color: inherit;">
+        <span>🏠</span>
+        <span>My Pastel Space</span>
+      </a>
+
+      <div class="theme-picker" title="테마 색상 변경">
+        <span style="font-size: 12px; color: var(--text-sub); margin-right: 4px; font-weight: 600;">Theme:</span>
+        <div class="theme-dot active" data-theme-value="default" style="background: #c084fc;" onclick="setTheme('default', this)" title="소프트 라벤더">
+        </div>
+        <div class="theme-dot" data-theme-value="pink" style="background: #ff8fa3;" onclick="setTheme('pink', this)" title="로맨틱 핑크"></div>
+        <div class="theme-dot" data-theme-value="mint" style="background: #2dd4bf;" onclick="setTheme('mint', this)" title="민트 브리즈"></div>
+        <div class="theme-dot" data-theme-value="sunset" style="background: #fb923c;" onclick="setTheme('sunset', this)" title="웜 선셋"></div>
+      </div>
+    </header>
+
+    <!-- Guestbook Section -->
+    <section>
+      <div class="interactive-card">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span class="icon">💌</span>
+          <span>방명록 (Guestbook)</span>
+        </div>
+        <p style="font-size: 14px; color: var(--text-sub); margin-top: -8px;">
+          놀러오신 기념으로 이름과 따뜻한 응원의 한 마디를 남겨주세요! 😊
+        </p>
+
+        <form class="input-group" onsubmit="addGuestbookEntry(event)">
+          <input type="text" id="guestNameInput" class="custom-input" style="flex: 0 0 140px;"
+            placeholder="이름" required maxlength="12">
+          <input type="text" id="guestMessageInput" class="custom-input"
+            placeholder="응원의 한마디를 적어보세요! (예: 웹페이지 너무 예뻐요 ✨)" required maxlength="60">
+          <button type="submit" class="btn btn-primary">
+            <span>등록</span>
+          </button>
+        </form>
+
+        <div class="messages-list" id="messagesContainer"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Jimin's Pastel Portfolio • Built with Passion & Vibe Coding 🌷</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function renderGuestbook() {
+      const entries = loadJSON(STORAGE_KEYS.guestbook, []);
+      const container = document.getElementById('messagesContainer');
+      container.innerHTML = '';
+
+      if (entries.length === 0) {
+        container.innerHTML = '<p style="font-size: 13px; color: var(--text-sub); text-align: center; padding: 12px 0;">아직 방명록이 없어요. 첫 방문자가 되어보세요! 🌱</p>';
+        return;
+      }
+
+      entries.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'message-item';
+        item.innerHTML = `
+          <span class="message-text"><span class="message-name">${escapeHtml(entry.name)}</span>💬 ${escapeHtml(entry.message)}</span>
+          <span class="message-time">${escapeHtml(entry.time)}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addGuestbookEntry(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('guestNameInput');
+      const messageInput = document.getElementById('guestMessageInput');
+      const name = nameInput.value.trim();
+      const message = messageInput.value.trim();
+      if (!name || !message) return;
+
+      const time = new Date().toLocaleString('ko-KR', {
+        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+
+      const entries = loadJSON(STORAGE_KEYS.guestbook, []);
+      entries.unshift({ name, message, time });
+      saveState(STORAGE_KEYS.guestbook, entries);
+
+      nameInput.value = '';
+      messageInput.value = '';
+      renderGuestbook();
+    }
+
+    initThemeDots();
+    renderGuestbook();
+  </script>
+</body>
+
+</html>
