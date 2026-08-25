@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Computer_Science-22학번-6C5CE7?style=flat-square"/>
   <img src="https://img.shields.io/badge/Focus-Mobile%20App%20%26%20Game%20Dev-4ECDC4?style=flat-square"/>
   <img src="https://img.shields.io/badge/Status-Seeking%20Challenges-333333?style=flat-square"/>
-  <a href="https://github.com/leechimins"><img src="https://komarev.com/ghpvc/?username=leechimins&color=4ecdc4&style=flat-square&label=Profile+Views" alt="Profile Views"/></a>
+  <a href="https://github.com/leechimins"><img src="https://visitor-badge.laobi.icu/badge?page_id=leechimins.School_VibeCoding" alt="Profile Views"/></a>
 </div>
 
 <br/>
