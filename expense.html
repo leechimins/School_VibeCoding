@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미니 가계부 분석기 💰 | My Pastel Space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Pretendard:wght@300;400;600;700;800&family=Gaegu:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem('vibecoding_theme');
+      if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <style>
+    .expense-item {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      padding: 12px 18px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .expense-item-info {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .expense-item-name {
+      color: var(--text-main);
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .expense-item-amount {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .expense-item-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .expense-item-time {
+      color: var(--text-sub);
+      font-size: 11px;
+    }
+
+    .expense-delete-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-sub);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .expense-delete-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .expense-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: linear-gradient(120deg, var(--primary), var(--accent));
+      border-radius: 20px;
+      color: #fff;
+      box-shadow: 0 12px 26px -8px rgba(255, 143, 163, 0.45);
+    }
+
+    .expense-total-label {
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .expense-total-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .amount-input {
+      flex: 0 0 160px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <a class="logo-badge" href="hello.html" style="text-decoration: none; color: inherit;">
+        <span>🏠</span>
+        <span>My Pastel Space</span>
+      </a>
+
+      <div class="theme-picker" title="테마 색상 변경">
+        <span style="font-size: 12px; color: var(--text-sub); margin-right: 4px; font-weight: 600;">Theme:</span>
+        <div class="theme-dot active" data-theme-value="default" style="background: #c084fc;" onclick="setTheme('default', this)" title="소프트 라벤더">
+        </div>
+        <div class="theme-dot" data-theme-value="pink" style="background: #ff8fa3;" onclick="setTheme('pink', this)" title="로맨틱 핑크"></div>
+        <div class="theme-dot" data-theme-value="mint" style="background: #2dd4bf;" onclick="setTheme('mint', this)" title="민트 브리즈"></div>
+        <div class="theme-dot" data-theme-value="sunset" style="background: #fb923c;" onclick="setTheme('sunset', this)" title="웜 선셋"></div>
+      </div>
+    </header>
+
+    <!-- Expense Input Section -->
+    <section>
+      <div class="interactive-card">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span class="icon">💰</span>
+          <span>미니 가계부 분석기</span>
+        </div>
+        <p style="font-size: 14px; color: var(--text-sub); margin-top: -8px;">
+          오늘 쓴 돈을 항목별로 기록하고 한눈에 합계를 확인해보세요! 🧾
+        </p>
+
+        <form class="input-group" onsubmit="addExpenseEntry(event)">
+          <input type="text" id="expenseNameInput" class="custom-input" placeholder="항목명 (예: 점심 식사)" required
+            maxlength="20">
+          <input type="number" id="expenseAmountInput" class="custom-input amount-input" placeholder="금액"
+            min="0" step="1" required>
+          <button type="submit" class="btn btn-primary">
+            <span>추가</span>
+          </button>
+        </form>
+
+        <div class="messages-list" id="expenseListContainer"></div>
+
+        <div class="expense-total-bar">
+          <span class="expense-total-label">💸 총 지출 합계</span>
+          <span class="expense-total-value"><span id="expenseTotalValue">0</span>원</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Jimin's Pastel Portfolio • Built with Passion & Vibe Coding 🌷</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function renderExpenseList() {
+      const entries = loadJSON(STORAGE_KEYS.expenses, []);
+      const container = document.getElementById('expenseListContainer');
+      container.innerHTML = '';
+
+      if (entries.length === 0) {
+        container.innerHTML = '<p style="font-size: 13px; color: var(--text-sub); text-align: center; padding: 12px 0;">아직 기록된 지출이 없어요. 첫 항목을 추가해보세요! 🌱</p>';
+      } else {
+        entries.forEach(entry => {
+          const item = document.createElement('div');
+          item.className = 'expense-item';
+          item.innerHTML = `
+            <span class="expense-item-info">
+              <span class="expense-item-name">${escapeHtml(entry.name)}</span>
+              <span class="expense-item-amount">${entry.amount.toLocaleString('ko-KR')}원</span>
+            </span>
+            <span class="expense-item-right">
+              <span class="expense-item-time">${escapeHtml(entry.time)}</span>
+              <button type="button" class="expense-delete-btn" onclick="deleteExpenseEntry('${entry.id}')" title="삭제">✕</button>
+            </span>
+          `;
+          container.appendChild(item);
+        });
+      }
+
+      const total = entries.reduce((sum, entry) => sum + entry.amount, 0);
+      document.getElementById('expenseTotalValue').textContent = total.toLocaleString('ko-KR');
+    }
+
+    function addExpenseEntry(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('expenseNameInput');
+      const amountInput = document.getElementById('expenseAmountInput');
+      const name = nameInput.value.trim();
+      const amount = parseInt(amountInput.value, 10);
+      if (!name || isNaN(amount) || amount < 0) return;
+
+      const time = new Date().toLocaleString('ko-KR', {
+        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+
+      const entries = loadJSON(STORAGE_KEYS.expenses, []);
+      entries.unshift({ id: Date.now().toString(), name, amount, time });
+      saveState(STORAGE_KEYS.expenses, entries);
+
+      nameInput.value = '';
+      amountInput.value = '';
+      nameInput.focus();
+      renderExpenseList();
+    }
+
+    function deleteExpenseEntry(id) {
+      const entries = loadJSON(STORAGE_KEYS.expenses, []);
+      const filtered = entries.filter(entry => entry.id !== id);
+      saveState(STORAGE_KEYS.expenses, filtered);
+      renderExpenseList();
+    }
+
+    initThemeDots();
+    renderExpenseList();
+  </script>
+</body>
+
+</html>
