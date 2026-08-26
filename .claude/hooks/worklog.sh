@@ -16,7 +16,12 @@ try:
     text = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', text)
     text = re.sub(r'[\`*#_]', '', text)
     text = ' '.join(text.split())
-    line = f'{timestamp} ✅ {text[:15]}'
+    LIMIT = 35
+    if len(text) > LIMIT:
+        cut = text[:LIMIT]
+        last_space = cut.rfind(' ')
+        text = cut[:last_space] if last_space > 0 else cut
+    line = f'{timestamp} ✅ {text}'
 except Exception:
     line = f'{timestamp} ⚠️ 훅 실패'
 
