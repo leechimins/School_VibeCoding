@@ -7,6 +7,7 @@ const STORAGE_KEYS = {
   likes: 'vibecoding_likes',
   guestbook: 'vibecoding_guestbook',
   feelDiary: 'vibecoding_feelDiary',
+  expenses: 'vibecoding_expenses',
 };
 
 // localStorage helpers
