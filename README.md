@@ -14,6 +14,14 @@
 
 <br/>
 
+## 💬 오늘의 한마디
+
+<!-- QUOTE:START -->
+오늘도 한 줄의 코드가 내일의 나를 만든다.
+<!-- QUOTE:END -->
+
+<br/>
+
 ## 📌 About Me
 
 - 📱 **Mobile & Game Dev**: Android(Kotlin), Flutter 기반의 모바일 앱과 Unity(C#), Unreal Engine(C++) 기반 게임 개발에 주력하고 있습니다.

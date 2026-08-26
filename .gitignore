@@ -27,6 +27,7 @@ desktop.ini
 # --- Logs & Runtime ---
 logs/
 *.log
+.claude/worklog.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

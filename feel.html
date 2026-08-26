@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘의 기분 🌈 | My Pastel Space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Pretendard:wght@300;400;600;700;800&family=Gaegu:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem('vibecoding_theme');
+      if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <style>
+    .mood-btn-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .mood-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 8px;
+      font-size: 32px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .mood-btn span.label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+
+    .mood-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .mood-btn.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 143, 163, 0.2);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .mood-message {
+      min-height: 24px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 4px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <a class="logo-badge" href="hello.html" style="text-decoration: none; color: inherit;">
+        <span>🏠</span>
+        <span>My Pastel Space</span>
+      </a>
+
+      <div class="theme-picker" title="테마 색상 변경">
+        <span style="font-size: 12px; color: var(--text-sub); margin-right: 4px; font-weight: 600;">Theme:</span>
+        <div class="theme-dot active" data-theme-value="default" style="background: #c084fc;" onclick="setTheme('default', this)" title="소프트 라벤더">
+        </div>
+        <div class="theme-dot" data-theme-value="pink" style="background: #ff8fa3;" onclick="setTheme('pink', this)" title="로맨틱 핑크"></div>
+        <div class="theme-dot" data-theme-value="mint" style="background: #2dd4bf;" onclick="setTheme('mint', this)" title="민트 브리즈"></div>
+        <div class="theme-dot" data-theme-value="sunset" style="background: #fb923c;" onclick="setTheme('sunset', this)" title="웜 선셋"></div>
+      </div>
+    </header>
+
+    <!-- Feel Diary Section -->
+    <section>
+      <div class="interactive-card">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span class="icon">📔</span>
+          <span>오늘의 기분 일기</span>
+        </div>
+        <p style="font-size: 14px; color: var(--text-sub); margin-top: -8px;">
+          오늘 있었던 일과 기분을 편하게 적어보세요 ✍️
+        </p>
+
+        <form class="input-group" onsubmit="addFeelEntry(event)">
+          <textarea id="feelTextInput" class="custom-input" rows="3"
+            placeholder="오늘 하루는 어땠나요? (예: 팀 과제를 무사히 끝내서 뿌듯했어요 😊)" required maxlength="200"
+            style="resize: vertical; min-width: 0;"></textarea>
+          <button type="submit" class="btn btn-primary" style="align-self: flex-end;">
+            <span>저장</span>
+          </button>
+        </form>
+
+        <div class="messages-list" id="feelEntriesContainer"></div>
+      </div>
+    </section>
+
+    <!-- Mood Emoji Section -->
+    <section>
+      <div class="interactive-card">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span class="icon">🌈</span>
+          <span>오늘 기분은 어때요?</span>
+        </div>
+        <p style="font-size: 14px; color: var(--text-sub); margin-top: -8px;">
+          지금 기분과 가장 가까운 이모지를 눌러보세요!
+        </p>
+
+        <div class="mood-btn-row">
+          <button type="button" class="mood-btn" id="moodBtnGood" onclick="showMoodMessage('good', this)">
+            <span>😊</span>
+            <span class="label">좋음</span>
+          </button>
+          <button type="button" class="mood-btn" id="moodBtnSoso" onclick="showMoodMessage('soso', this)">
+            <span>😐</span>
+            <span class="label">그저 그럼</span>
+          </button>
+          <button type="button" class="mood-btn" id="moodBtnBad" onclick="showMoodMessage('bad', this)">
+            <span>😢</span>
+            <span class="label">힘듦</span>
+          </button>
+        </div>
+
+        <div class="mood-message" id="moodMessage"></div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Jimin's Pastel Portfolio • Built with Passion & Vibe Coding 🌷</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function renderFeelDiary() {
+      const entries = loadJSON(STORAGE_KEYS.feelDiary, []);
+      const container = document.getElementById('feelEntriesContainer');
+      container.innerHTML = '';
+
+      if (entries.length === 0) {
+        container.innerHTML = '<p style="font-size: 13px; color: var(--text-sub); text-align: center; padding: 12px 0;">아직 기록된 기분 일기가 없어요. 오늘의 기분을 남겨보세요! 🌱</p>';
+        return;
+      }
+
+      entries.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'message-item';
+        item.innerHTML = `
+          <span class="message-text">${escapeHtml(entry.text)}</span>
+          <span class="message-time">${escapeHtml(entry.time)}</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function addFeelEntry(event) {
+      event.preventDefault();
+      const textInput = document.getElementById('feelTextInput');
+      const text = textInput.value.trim();
+      if (!text) return;
+
+      const time = new Date().toLocaleString('ko-KR', {
+        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
+      });
+
+      const entries = loadJSON(STORAGE_KEYS.feelDiary, []);
+      entries.unshift({ text, time });
+      saveState(STORAGE_KEYS.feelDiary, entries);
+
+      textInput.value = '';
+      renderFeelDiary();
+    }
+
+    const MOOD_MESSAGES = {
+      good: '오늘 하루도 반짝반짝 빛나는 당신이에요! ✨',
+      soso: '무던하게 흘러가는 하루도 소중해요. 잘하고 있어요 🌿',
+      bad: '오늘 많이 힘들었죠? 잘 버텨줘서 고마워요, 토닥토닥 🫂'
+    };
+
+    function showMoodMessage(mood, el) {
+      document.getElementById('moodMessage').textContent = MOOD_MESSAGES[mood];
+      document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
+      if (el) el.classList.add('active');
+    }
+
+    initThemeDots();
+    renderFeelDiary();
+  </script>
+</body>
+
+</html>

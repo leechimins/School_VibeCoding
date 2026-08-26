@@ -5,6 +5,8 @@ description: "CONTRIBUTING.md에 정의된 표준 PR 템플릿 양식에 맞춰 
 
 # 🚀 Pull Request 작성 스킬 (`write-pr`)
 
+**트리거:** `/write-pr`
+
 `CONTRIBUTING.md`에 명시된 PR 템플릿 규격에 맞춰 현재 브랜치의 커밋 및 변경 파일 내역을 분석하고 표준 Pull Request 제목과 본문을 작성합니다.
 
 ---
@@ -68,3 +70,7 @@ description: "CONTRIBUTING.md에 정의된 표준 PR 템플릿 양식에 맞춰 
   gh pr create --title "[Week ##] 제목" --body "..."
   ```
 - 웹 브라우저 GitHub 페이지에서 직접 복사하여 붙여넣을 수 있도록 마크다운을 제공합니다.
+
+### 4단계: 결과 보고 및 안내
+- 생성된 PR 제목과 본문 마크다운을 확인하고, GitHub에서 PR을 등록하는 방법(또는 `gh pr create`)을 간결하게 안내합니다.
+
