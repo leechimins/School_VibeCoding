@@ -2,8 +2,8 @@ name: Vibe Hello - 오늘의 한마디
 
 on:
   schedule:
-    # 매일 아침 9시(KST, UTC+9) = 00:00 UTC
-    - cron: '0 0 * * *'
+    # 매일 10시 57분(KST, UTC+9) = 01:57 UTC
+    - cron: '57 1 * * *'
   workflow_dispatch: {}
 
 permissions:
