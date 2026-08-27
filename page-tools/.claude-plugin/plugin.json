@@ -1,0 +1,5 @@
+{
+  "name": "page-tools",
+  "description": "웹페이지 품질·보안 점검, 트랙 판정, Git 브랜치/커밋/PR 자동화 스킬과 에이전트 모음 (page-check, security-check, track-check, branch-work, commit, write-pr)",
+  "version": "0.1.0"
+}
