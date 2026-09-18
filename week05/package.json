@@ -1,0 +1,11 @@
+{
+  "name": "messy-refund-practice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "정리 연습용으로 일부러 어질러 놓은 결제 코드베이스",
+  "main": "src/payments/refund.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "UNLICENSED"
+}
