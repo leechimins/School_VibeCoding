@@ -19,3 +19,9 @@
 - 파괴적이거나 비가역적인 명령어(`rm -rf`, `git push --force` 등) 실행 금지
 - 요청 범위 외 파일 임의 수정 및 무단 리팩터링 금지
 - 절대 위반 금지 규칙은 @GOLDEN_RULES.md 참조
+
+## Gotchas & Why
+- **Why Test-First**: 에이전트의 퇴행(Regression) 방지 및 자율 검증 피드백 루프 보장
+- **Gotcha (CLI)**: Windows 환경 실행 정책 제한 시 `cmd.exe /c` 또는 node 직접 실행 권장
+- **Gotcha (Worktree)**: Git worktree 구조이므로 상위 경로 변경 없이 `week06/` 내부만 격리 수정
+
