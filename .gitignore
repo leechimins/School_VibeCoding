@@ -75,6 +75,7 @@ package-lock.json.bak
 # --- Android App ---
 .gradle/
 captures/
+!week06/captures/
 .externalNativeBuild/
 .cxx/
 *.apk
@@ -138,3 +139,6 @@ tmp/
 temp/
 *.tmp
 *.bak
+
+# --- Course Notes & Guides (Local Only) ---
+6주차_*

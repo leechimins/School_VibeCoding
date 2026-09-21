@@ -1,0 +1,10 @@
+{
+  "name": "week06-agentic-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Week 06 Agentic Lab & Team Plugin",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "UNLICENSED"
+}
