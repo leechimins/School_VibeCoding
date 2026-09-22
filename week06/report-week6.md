@@ -7,7 +7,7 @@
 - [x] LAB 06: TDD 가드 훅 설치 및 강제 한 사이클
 - [x] LAB 10: Agent Guardrails (Bash Prevent 가드 및 BLOCKED)
 - [x] LAB 05: Team Plugin (luna-toolkit) 포장 및 타 폴더 검증
-- [ ] luna-plugin GitHub 공개 저장소 배포
+- [x] luna-plugin GitHub 공개 저장소 배포
 
 ---
 
@@ -112,10 +112,10 @@
 
 ### luna-plugin GitHub 공개 저장소 배포
 
-- **저장소 링크**: 
+- **저장소 링크**: https://github.com/leechimins/luna-plugin
 - **핵심 증거**:
 ![GitHub 배포 확인](captures/lab_github_deploy.png)
-- **관찰 한 줄**:
+- **관찰 한 줄**: README의 설치 경로를 로컬 절대경로에서 GitHub 아이디 기반으로 바꾸고 나니, `/plugin marketplace add` 한 줄만으로 어느 컴퓨터에서든 같은 플러그인을 받을 수 있게 됐다.
 
 ---
 
@@ -129,6 +129,6 @@
 
 ## 4. 제출 링크
 
-- 작업 저장소(week06): 
-- 플러그인 저장소(luna-plugin):
+- 작업 저장소(week06): https://github.com/leechimins/School_VibeCoding/tree/Week06
+- 플러그인 저장소(luna-plugin): https://github.com/leechimins/luna-plugin
 
