@@ -4,6 +4,10 @@
       {
         "matcher": "Edit|Write",
         "command": "$CLAUDE_PROJECT_DIR/scripts/hooks/tdd-guard.sh"
+      },
+      {
+        "matcher": "Bash",
+        "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'rm[[:space:]]+-rf|git[[:space:]]+push[[:space:]]+--force|git[[:space:]]+reset[[:space:]]+--hard|DROP[[:space:]]+TABLE'; then echo \"BLOCKED: 위험한 명령어가 감지되었습니다\" >&2; exit 1; fi"
       }
     ]
   }
